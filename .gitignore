@@ -5,5 +5,10 @@ __pycache__/
 .env
 *.tfstate
 *.tfstate.*
-*.terraform*
+.terraform/
 .DS_Store
+*.tfstate
+*.tfstate.*
+tfplan
+terraform.tfvars
+*.pemgit 
