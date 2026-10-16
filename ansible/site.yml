@@ -1,0 +1,5 @@
+- name: Bootstrap Docker host
+  hosts: web
+  become: true
+  roles:
+    - docker
