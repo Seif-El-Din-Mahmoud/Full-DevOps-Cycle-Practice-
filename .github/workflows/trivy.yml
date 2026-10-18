@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Trivy filesystem and config scan
-        uses: aquasecurity/trivy-action@0.33.1
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
         with:
           scan-type: fs
           scan-ref: .
@@ -35,7 +35,7 @@ jobs:
         run: docker build -t flask-app:${{ github.sha }} .
 
       - name: Trivy image scan
-        uses: aquasecurity/trivy-action@0.33.1
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
         with:
           image-ref: flask-app:${{ github.sha }}
           severity: HIGH,CRITICAL
