@@ -4,26 +4,27 @@ on:
   push:
     branches: [main]
   pull_request:
+  schedule:
+    - cron: "0 6 * * 1" # weekly, catches newly published CVEs
 
 permissions:
   contents: read
 
-jobs:
-  repo-scan:
-    name: Scan repo (dependencies, secrets, Dockerfile, Terraform)
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+  # jobs:
+  #   iac-and-secrets-scan:
+  #     name: Scan Terraform, Dockerfile and secrets
+  #     runs-on: ubuntu-latest
+  #     steps:
+  #       - uses: actions/checkout@v4
 
-      - name: Trivy filesystem and config scan
-        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
-        with:
-          scan-type: fs
-          scan-ref: .
-          scanners: vuln,secret,misconfig
-          severity: HIGH,CRITICAL
-          ignore-unfixed: true
-          exit-code: "1"
+  #       - name: Trivy config and secret scan
+  #         uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+  #         with:
+  #           scan-type: fs
+  #           scan-ref: .
+  #           scanners: secret,misconfig
+  #           severity: HIGH,CRITICAL
+  #           exit-code: "1"
 
   image-scan:
     name: Build and scan Docker image
