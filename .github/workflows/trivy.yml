@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   checkov:
-    name: Scan Terraform, Dockerfile and workflows
+    name: Scan Terraform
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
