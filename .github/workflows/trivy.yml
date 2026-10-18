@@ -11,20 +11,24 @@ permissions:
   contents: read
 
 jobs:
-  # iac-and-secrets-scan:
-  #   name: Scan Terraform, Dockerfile and secrets
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
+  checkov:
+    name: Scan Terraform, Dockerfile and workflows
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
 
-  #     - name: Trivy config and secret scan
-  #       uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
-  #       with:
-  #         scan-type: fs
-  #         scan-ref: .
-  #         scanners: secret,misconfig
-  #         severity: HIGH,CRITICAL
-  #         exit-code: "1"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Checkov
+        run: pip install checkov==3.3.29
+
+      - name: Run Checkov
+        run: |
+          checkov -d infra \
+            --framework terraform \
+            --quiet --compact
 
   image-scan:
     name: Build and scan Docker image
