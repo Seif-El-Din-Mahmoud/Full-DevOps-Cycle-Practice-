@@ -10,21 +10,21 @@ on:
 permissions:
   contents: read
 
-  # jobs:
-  #   iac-and-secrets-scan:
-  #     name: Scan Terraform, Dockerfile and secrets
-  #     runs-on: ubuntu-latest
-  #     steps:
-  #       - uses: actions/checkout@v4
+jobs:
+  # iac-and-secrets-scan:
+  #   name: Scan Terraform, Dockerfile and secrets
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
 
-  #       - name: Trivy config and secret scan
-  #         uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
-  #         with:
-  #           scan-type: fs
-  #           scan-ref: .
-  #           scanners: secret,misconfig
-  #           severity: HIGH,CRITICAL
-  #           exit-code: "1"
+  #     - name: Trivy config and secret scan
+  #       uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+  #       with:
+  #         scan-type: fs
+  #         scan-ref: .
+  #         scanners: secret,misconfig
+  #         severity: HIGH,CRITICAL
+  #         exit-code: "1"
 
   image-scan:
     name: Build and scan Docker image
